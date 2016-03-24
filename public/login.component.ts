@@ -2,7 +2,7 @@ import {Component} from 'angular2/core'
 import {Router} from 'angular2/router'
 
 class Login {
-	public name: string,
+	public name: string
 	public password: string
 }
 

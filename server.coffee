@@ -1,5 +1,6 @@
 express = require 'express'
 morgan = require 'morgan'
+cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 jwt = require 'jsonwebtoken'
 config = require './config'
@@ -11,6 +12,7 @@ port = process.env.PORT || config.port
 
 app = express()
 app.use morgan('dev')
+app.use cookieParser()
 app.use bodyParser.json()
 app.use bodyParser.urlencoded({extended: false})
 
@@ -18,6 +20,11 @@ app.use bodyParser.urlencoded({extended: false})
 app.get '/home.component.html', isAuth
 app.get '/users.component.html', isAuth
 app.get '/about.component.html', isAuth
+app.get '/isAuth', isAuth, (req, res) =>
+	res.json {
+		success: true,
+		message: 'authenticated user'
+	}
 
 #static file routes
 app.use express.static(__dirname+'/public')

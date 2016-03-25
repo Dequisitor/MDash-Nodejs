@@ -1,13 +1,14 @@
+<div class="alert alert-danger" *ngIf="message">{{message}}</div>
 <form>
 	<div class="form-group">
 		<label for="name">Login name</label>
-		<input name="name" class="form-control" type="text" [(ngModel)]="_model.name" required="required">
+		<input name="name" class="form-control" type="text" [(ngModel)]="_model.name" required="required" autofocus="autofocus">
 	</div>
 	<div class="form-group">
 		<label for="password">Password</label>
-		<input name="password" class="form-control" type="password" [(ngModel)]="_model.password" required="required">
+		<input name="password" class="form-control" type="password" [(ngModel)]="_model.password" required="required" (focus)="name">
 	</div>
 	<div class="form-group">
-		<button type="submit" class="btn btn-success pull-right" (click)="onSubmit($event, _model)">Login</button>
+		<button type="submit" class="btn btn-primary pull-right" (click)="onSubmit($event, _model)">Login</button>
 	</div>
 </form>

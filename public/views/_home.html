@@ -1,11 +1,11 @@
 <html>
 	<head>
-		<title>Login Page - MDash test</title>
+		<title>MDash test - Main page</title>
 		<base href="/">
 		<meta name="viewport" content="width=device-width,initial-scale=1">
-		<link rel="stylesheet" href="components/bootstrap/dist/css/bootstrap.min.css">
-		<link rel="stylesheet" href="components/bootswatch/darkly/bootstrap.min.css">
-		<link rel="stylesheet" href="components/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/bootswatch/darkly/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
 		<link rel="stylesheet" href="content/app.css">
 
 		<script src="angular2/bundles/angular2-polyfills.js"></script>
@@ -19,21 +19,21 @@
 		<script>
 			System.config({
 				packages: {
-					dist: {
+					home: {
 						format: 'register',
 						defaultExtension: 'js'
 					}
 				}
 			});
-			System.import('dist/main').then(null, console.error.bind(console));
+			System.import('home/home').then(null, console.error.bind(console));
 		</script>
 	</head>
 	<body>
 		<div class="container-fluid">
-			<app-main>Loading...</app-main>
+			<home-main>Loading...</home-main>
 		</div>
 	</body>
-	<script src="components/jquery/dist/jquery.min.js"></script>
-	<script src="components/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="components/bootstrap/js/tab.js"></script>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/bootstrap/js/tab.js"></script>
 </html>

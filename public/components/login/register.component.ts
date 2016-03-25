@@ -6,6 +6,9 @@ import 'rxjs/Rx'
 class Login {
 	public name: string
 	public password: string
+	public isAdmin: boolean
+	public fullname: string
+	public email: string
 }
 
 @Component({
@@ -22,22 +25,25 @@ export class RegisterComponent {
 	}
 
 	public onSubmit($event) {
-		console.log(this._model)
 		$event.preventDefault()
 
-		var body = "name="+this._model.name+"&password="+this._model.password
-		var headers = new Headers()
-		headers.append('Content-Type', 'application/x-www-form-urlencoded')
+		this._model.isAdmin = false
+		let body = JSON.stringify(this._model)
+		let headers = new Headers()
+		headers.append('Content-Type', 'application/json')
 
-		this._http.post('/register', body, { headers: headers })
+		this._http.post('/api/user', body, { headers: headers })
 			.map(res => res.json())
 			.subscribe(
 				res => {
-					console.log(res)
-					this._router.navigate(['Login'])
+					if (res.success) {
+						console.log(res)
+						this._router.navigate(['Login', { name: res.result.user.name }])
+					} else {
+						this.message = res.message
+					}
 				},
 				error => {
-					console.log(error)
 					this.message = error
 				}
 			)

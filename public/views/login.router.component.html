@@ -1,0 +1,8 @@
+<h3>Welcome to MDash-test</h3>
+<p *ngIf="currentPageIsLogin()">Please log in (or <a [routerLink]="['Register']">Sign up</a>)</p>
+<p *ngIf="!currentPageIsLogin()">Back to <a [routerLink]="['Login']">Login</a> page</p>
+<div class="row">
+	<div class="col-md-6 col-md-offset-3 col-xs-10 col-xs-offset-1">
+		<router-outlet></router-outlet>
+	</div>
+</div>

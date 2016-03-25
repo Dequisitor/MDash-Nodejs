@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>MDash test - Login page</title>
+		<base href="/">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/bootswatch/darkly/bootstrap.min.css">
+		<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css">
+		<link rel="stylesheet" href="content/app.css">
+
+		<script src="angular2/bundles/angular2-polyfills.js"></script>
+		<script src="systemjs/dist/system.src.js"></script>
+		<script src="rxjs/bundles/Rx.js"></script>
+		<script src="angular2/bundles/angular2.dev.js"></script>
+		<script src="angular2/bundles/router.dev.js"></script>
+		<script src="angular2/bundles/http.dev.js"></script>
+		<script src="angular2-cookie/bundles/angular2-cookie.min.js"></script>
+
+		<script>
+			System.config({
+				packages: {
+					login: {
+						format: 'register',
+						defaultExtension: 'js'
+					}
+				}
+			});
+			System.import('login/login').then(null, console.error.bind(console));
+		</script>
+	</head>
+	<body>
+		<div class="container-fluid">
+			<login-main>Loading...</login-main>
+		</div>
+	</body>
+	<script src="bower_components/jquery/dist/jquery.min.js"></script>
+	<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="bower_components/bootstrap/js/tab.js"></script>
+</html>

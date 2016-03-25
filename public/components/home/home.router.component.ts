@@ -1,17 +1,16 @@
 import {Component} from 'angular2/core'
-import {RouteConfig, Router, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
+import {RouteConfig, Router, Location, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 import {CookieService} from 'angular2-cookie/core'
 import {Http} from 'angular2/http'
+import 'rxjs/Rx' //needed for .map
 
 import {HomeComponent} from './home.component'
 import {UsersComponent} from './users.component'
 import {AboutComponent} from './about.component'
-import {LoginComponent} from './login.component'
-import {RegisterComponent} from './register.component'
 
 @Component({
-	selector: 'app-main',
-	templateUrl: 'app.component.html',
+	selector: 'home-main',
+	templateUrl: 'home.router.component.html',
 	directives: [ROUTER_DIRECTIVES],
 	providers: [ROUTER_PROVIDERS, CookieService]
 })
@@ -19,7 +18,8 @@ import {RegisterComponent} from './register.component'
 	{
 		path: '/home',
 		name: 'Home',
-		component: HomeComponent
+		component: HomeComponent,
+		useAsDefault: true
 	},
 	{
 		path: '/users',
@@ -30,37 +30,20 @@ import {RegisterComponent} from './register.component'
 		path: '/about',
 		name: 'About',
 		component: AboutComponent
-	},
-	{
-		path: '/login',
-		name: 'Login',
-		component: LoginComponent,
-		useAsDefault: true
-	},
-	{
-		path: '/register',
-		name: 'Register',
-		component: RegisterComponent
 	}
 ])
-export class AppComponent {
+export class HomeRouterComponent {
 	public message: string
+	public username: string
 	private _token: string
 
-	constructor(private _router: Router, private _cookieService: CookieService, private _http: Http) {
-		this._token = this._cookieService.get('token')
-
-		console.log('inside app constructor')
-		if (!this._token && (this._router.lastNavigationAttempt != 'Register')) {
-			console.log('navigate to login')
-			this._router.navigate(['Login'])
-		}
+	constructor(private _router: Router, private _cookieService: CookieService, private _http: Http, private _location: Location) {
+		this.username = 'None'
 	}
 
 	public changeRoute(route: string) {
 		this._token = this._cookieService.get('token')
 		if (this._token) {
-			console.log('changing route to ', route)
 			this._http.get('/isAuth')
 				.map(res => res.json())
 				.subscribe(
@@ -78,14 +61,22 @@ export class AppComponent {
 					}
 				)
 		} else {
-			console.log('rerouting to login')
-			this.message = "Unauthorized"
-			this._router.navigate(['Login'])
+			window.location.href = '/login'
 		}
 	}
 
 	public logoutUser() {
 		this._cookieService.remove('token')
-		this._router.navigate(['Login'])
+		this._cookieService.remove('mdash-user')
+		window.location.href = '/login'
+	}
+
+	public isActiveRoute(route: string): boolean {
+		let path = this._location.path()
+		if (path == '/'+route) {
+			return true
+		} else {
+			return false
+		}
 	}
 }

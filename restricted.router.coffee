@@ -1,24 +1,16 @@
 jwt = require 'jsonwebtoken'
 config = require './config'
 
-isAuth = (req, res, next) =>
-	token = req.body?.token || req.headers?.token || req.cookies?.token
-
-	if not token
-		res.json {
-			success: false,
-			message: 'no token present'
-		}
-	else
-		jwt.verify token, config.secret, (err, dtoken) =>
-			if err
-				res.json {
-					success: false,
-					message: 'invalid token'
-				}
+isAuth = (success, failure) =>
+	return (req, res, next) =>
+			token = req.cookies?.token
+			if not token
+				failure req, res, 'no token present'
 			else
-				req.dtoken = dtoken
-				next()
-	return
-
+				jwt.verify token, config.secret, (err, dtoken) =>
+					if err
+						failure req, res, 'invalid token'
+					else
+						success req, res, next
+	
 module.exports = isAuth

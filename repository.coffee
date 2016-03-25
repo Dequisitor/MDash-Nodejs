@@ -6,17 +6,12 @@ class Repository
 		this.db = mongojs connectionString, ['users']
 		return
 	
-	saveUser: (name, password, callback) =>
-		#hash password
-		this.db.users.insert {
-			name: name,
-			password: password,
-			admin: false
-		}, (err, user) =>
+	addUser: (user, callback) =>
+		this.db.users.insert user, (err, user) =>
 			callback err, user
 		return
 	
-	findUser: (name, callback) =>
+	getUser: (name, callback) =>
 		this.db.users.findOne {name: name}, (err, user) =>
 			callback err, user
 		return
@@ -24,6 +19,11 @@ class Repository
 	getAllUsers: (callback) =>
 		this.db.users.find {}, {name: 1}, (err, users) =>
 			callback err, users
+		return
+
+	deleteUser: (name, callback) =>
+		this.db.users.remove {name: name}, (err) =>
+			callback err
 		return
 
 repo = new Repository(config.connectionString)

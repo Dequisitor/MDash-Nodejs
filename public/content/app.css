@@ -4,3 +4,6 @@ nav.nav {
 a.btn.router-link-active {
 	background-color: #777;
 }
+a {
+	cursor: pointer;
+}

@@ -17,7 +17,7 @@ class Repository
 		return
 
 	getAllUsers: (callback) =>
-		this.db.users.find {}, {name: 1}, (err, users) =>
+		this.db.users.find {}, {name: 1, isAdmin: 1, fullname: 1, email: 1}, (err, users) =>
 			callback err, users
 		return
 

@@ -28,6 +28,7 @@ isLoggedIn = isAuth(
 )
 
 #router.use isLoggedIn #comment for testing
+#TODO: post:user must be auth free
 
 router.get '/user', (req, res) =>
 	repo.getAllUsers (err, users) =>
@@ -64,6 +65,7 @@ router.post '/user', (req, res) =>
 				sendSuccess res, user: { name: user.name }
 	return
 
+#TODO: delete available only for admin, or self-delete
 router.delete '/user/:name', (req, res) =>
 	console.log req.params.name
 	if not req.params.name

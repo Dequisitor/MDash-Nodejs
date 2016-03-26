@@ -6,9 +6,17 @@ class Repository
 		this.db = mongojs connectionString, ['users']
 		return
 	
-	addUser: (user, callback) =>
-		this.db.users.insert user, (err, user) =>
-			callback err, user
+	#check if user name is unique
+	addUser: (newUser, callback) =>
+		this.db.users.findOne {name: newUser.name} , (err, user) =>
+			if not err
+				if not user?
+					this.db.users.insert newUser, (err, user) =>
+						callback err, user
+				else
+					callback 'user name already taken', null
+			else
+				callback err, null
 		return
 	
 	getUser: (name, callback) =>

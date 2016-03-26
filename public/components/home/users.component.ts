@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core'
+import {Component, OnInit} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {User, UserService} from '../services/user.service'
 import 'rxjs/Rx' //.map stuff
@@ -8,11 +8,11 @@ import 'rxjs/Rx' //.map stuff
 	templateUrl: 'users.component.html',
 	providers: [UserService]
 })
-export class UsersComponent {
+export class UsersComponent implements OnInit{
 	public users: User[]
 	public message: string
 
-	constructor(private _userService: UserService) {
+	ngOnInit() {
 		this._userService.getUsers((err, users) => {
 			if (!err) {
 				this.users = users
@@ -20,5 +20,8 @@ export class UsersComponent {
 				this.message = err
 			}
 		})
+	}
+
+	constructor(private _userService: UserService) {
 	}
 }

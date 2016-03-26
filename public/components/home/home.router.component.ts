@@ -35,15 +35,17 @@ import {AboutComponent} from './about.component'
 export class HomeRouterComponent {
 	public message: string
 	public username: string
-	private _token: string
 
-	constructor(private _router: Router, private _cookieService: CookieService, private _http: Http, private _location: Location) {
+	constructor(private _router: Router,
+				private _cookieService: CookieService,
+				private _http: Http,
+				private _location: Location) {
 		this.username = 'None'
 	}
 
 	public changeRoute(route: string) {
-		this._token = this._cookieService.get('token')
-		if (this._token) {
+		let token = this._cookieService.get('token')
+		if (token) {
 			this._http.get('/isAuth')
 				.map(res => res.json())
 				.subscribe(
@@ -67,7 +69,6 @@ export class HomeRouterComponent {
 
 	public logoutUser() {
 		this._cookieService.remove('token')
-		this._cookieService.remove('mdash-user')
 		window.location.href = '/login'
 	}
 

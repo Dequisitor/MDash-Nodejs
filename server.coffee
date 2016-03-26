@@ -4,7 +4,7 @@ cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
 repo = require './repository'
 config = require './config'
-isAuth = require './restricted.router'
+isAuth = require './isAuth'
 authRouter = require './auth.router'
 apiRouter = require './api.router'
 

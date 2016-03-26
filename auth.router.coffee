@@ -3,7 +3,7 @@ router = express.Router()
 repo = require './repository'
 jwt = require 'jsonwebtoken'
 config = require './config'
-isAuth = require './restricted.router'
+isAuth = require './isAuth'
 passwd = require 'password-hash'
 
 isAuthorizedForResource = isAuth(

@@ -2,7 +2,7 @@ express = require 'express'
 router = express.Router()
 repo = require './repository'
 config = require './config'
-isAuth = require './restricted.router'
+isAuth = require './isAuth'
 jwt = require 'jsonwebtoken'
 passwd = require 'password-hash'
 
@@ -52,7 +52,7 @@ router.post '/user', (req, res) =>
 			email: req.body.email
 		}
 		repo.addUser newUser, (err, user) =>
-			if err sendFail then res, err else sendSuccess res, user: { name: user.name }
+			if err then sendFail res, err else sendSuccess res, user: { name: user.name }
 	return
 
 #TODO: delete available only for admin, or self-delete
@@ -61,6 +61,7 @@ router.delete '/user/:name', (req, res) =>
 	if not req.params.name
 		sendFail res, 'no user name provided'
 	else
+		currentUser = getUser()
 		repo.deleteUser req.params.name, (err) =>
 			if err then sendFail res, err else sendSuccess res, null
 	return

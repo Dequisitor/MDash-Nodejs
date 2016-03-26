@@ -1,10 +1,11 @@
 express = require 'express'
 router = express.Router()
-repo = require './repository'
 jwt = require 'jsonwebtoken'
-config = require './config'
-isAuth = require './isAuth'
 passwd = require 'password-hash'
+
+config = require '../config'
+isAuth = require '../Helpers/isAuth'
+repo = require '../DAL/repository'
 
 isAuthorizedForResource = isAuth(
 	(req, res, next) =>

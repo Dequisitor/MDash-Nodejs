@@ -1,15 +1,18 @@
+#third party dependecies
 express = require 'express'
 morgan = require 'morgan'
 cookieParser = require 'cookie-parser'
 bodyParser = require 'body-parser'
-repo = require './repository'
+
+#local dependencies
+repo = require './DAL/repository'
 config = require './config'
-isAuth = require './isAuth'
-authRouter = require './auth.router'
-apiRouter = require './api.router'
+isAuth = require './Helpers/isAuth'
+authRouter = require './Routers/auth.router'
+apiRouter = require './Routers/api.router'
 
+#config server
 port = process.env.PORT || config.port
-
 app = express()
 app.use morgan('dev')
 app.use cookieParser()

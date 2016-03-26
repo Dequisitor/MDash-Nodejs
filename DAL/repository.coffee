@@ -1,5 +1,6 @@
 mongojs = require 'mongojs'
-config = require './config'
+
+config = require '../config'
 
 class Repository
 	constructor: (connectionString) ->
@@ -32,6 +33,21 @@ class Repository
 	deleteUser: (name, callback) =>
 		this.db.users.remove {name: name}, (err) =>
 			callback err
+		return
+
+	updateUser: (username, user, callback) =>
+		updateJson = {}
+		if user.name? then updateJson.name = user.name
+		if user.email? then updateJson.email = user.email
+		if user.fullname? then updateJson.fullname = user.fullname
+		if user.isAdmin? then updateJson.isAdmin = user.isAdmin
+
+		this.db.users.update(
+			{ name: username },
+			{ $set: updateJson },
+			(err) =>
+				callback err
+		)
 		return
 
 repo = new Repository(config.connectionString)

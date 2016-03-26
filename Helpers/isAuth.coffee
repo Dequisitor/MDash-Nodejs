@@ -1,5 +1,6 @@
 jwt = require 'jsonwebtoken'
-config = require './config'
+
+config = require '../config'
 
 isAuth = (success, failure) =>
 	return (req, res, next) =>
@@ -11,6 +12,7 @@ isAuth = (success, failure) =>
 					if err
 						failure req, res, 'invalid token'
 					else
+						req.dtoken = dtoken
 						success req, res, next
 	
 module.exports = isAuth

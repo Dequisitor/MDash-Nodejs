@@ -33,7 +33,7 @@ isAlreadyLoggedIn = isAuth(
 	,(req, res, err) =>
 		res.sendFile __dirname+'/public/views/_login.html'
 )
-app.get ['/', '/login'], isAlreadyLoggedIn
+app.get ['/', '/login', '/register'], isAlreadyLoggedIn
 
 isAuthForHomePage = isAuth(
 	(req, res, next) =>
@@ -41,7 +41,7 @@ isAuthForHomePage = isAuth(
 	,(req, res, err) =>
 		res.redirect('/') #not logged in, or invalid token, send back to login page
 )
-app.get '/home', isAuthForHomePage
+app.get ['/home', '/about', '/users'], isAuthForHomePage
 
 app.listen port, () =>
 	console.log 'webserver listening on port ', port

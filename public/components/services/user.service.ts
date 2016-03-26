@@ -15,14 +15,13 @@ export class UserService {
 	constructor(private _http: Http) {
 	}
 
-	public getUsers(callback) {
-		this._http.get('/api/user')
-			.map(res => res.json())
+	private _respond(api, callback) {
+		this._http.get(api)
+			.map(res=> res.json())
 			.subscribe(
 				res => {
 					if (res.success) {
-						this.users = res.result
-						callback(null, this.users)
+						callback(null, res.result)
 					} else {
 						callback(res.message, null)
 					}
@@ -31,5 +30,13 @@ export class UserService {
 					callback(error, null)
 				}
 			)
+	}
+
+	public getCurrentUser(callback) {
+		this._respond('/api/current', callback)
+	}
+
+	public getUsers(callback) {
+		this._respond('/api/user', callback)
 	}
 }

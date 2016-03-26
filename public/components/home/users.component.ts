@@ -10,12 +10,21 @@ import 'rxjs/Rx' //.map stuff
 })
 export class UsersComponent implements OnInit{
 	public users: User[]
+	public currentUser: User
 	public message: string
 
 	ngOnInit() {
 		this._userService.getUsers((err, users) => {
 			if (!err) {
 				this.users = users
+			} else {
+				this.message = err
+			}
+		})
+
+		this._userService.getCurrentUser((err, user) => {
+			if (!err) {
+				this.currentUser = user
 			} else {
 				this.message = err
 			}

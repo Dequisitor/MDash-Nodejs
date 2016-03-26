@@ -1,6 +1,6 @@
 <h3>List of registered users</h3>
 <div class="container-fluid">
-	<table class="table table-striped">
+	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>#</th>
@@ -18,7 +18,7 @@
 				<td>{{user.fullname}}</td>
 				<td>{{user.email}}</td>
 				<td>{{user.isAdmin}}</td>
-				<td><span class="fa fa-remove"></span></td>
+				<td><span class="fa fa-remove" *ngIf="currentUser?.name == user.name"></span></td>
 			</tr>
 		</tbody>
 	</table>

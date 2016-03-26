@@ -82,6 +82,13 @@ router.put '/user/:name', isLoggedIn, (req, res) =>
 			sendFail res, 'not authorized to change user\'s data'
 	return
 
-
+router.get '/current', isLoggedIn, (req, res) =>
+	res.json {
+		success: true,
+		result: {
+			name: req.dtoken.name,
+			isAdmin: req.dtoken.isAdmin
+		}
+	}
 
 module.exports = router

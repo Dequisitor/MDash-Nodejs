@@ -27,23 +27,16 @@ isLoggedIn = isAuth(
 		sendFail res, err
 )
 
-#router.use isLoggedIn #comment for testing
 #TODO: post:user must be auth free
 
 router.get '/user', (req, res) =>
 	repo.getAllUsers (err, users) =>
-		if not err
-			sendSuccess res, users
-		else
-			sendFail res, err
+		if not err then sendSuccess res, users else sendFail res, err
 	return
 
 router.get '/user/:name', (req, res) =>
 	repo.getUser req.params.name, (err, user) =>
-		if not err
-			sendSuccess res, user
-		else
-			sendFail res, err
+		if not err then sendSuccess res, user else sendFail res, err
 	return
 
 router.post '/user', (req, res) =>
@@ -59,10 +52,7 @@ router.post '/user', (req, res) =>
 			email: req.body.email
 		}
 		repo.addUser newUser, (err, user) =>
-			if err
-				sendFail res, err
-			else
-				sendSuccess res, user: { name: user.name }
+			if err sendFail then res, err else sendSuccess res, user: { name: user.name }
 	return
 
 #TODO: delete available only for admin, or self-delete
@@ -72,9 +62,7 @@ router.delete '/user/:name', (req, res) =>
 		sendFail res, 'no user name provided'
 	else
 		repo.deleteUser req.params.name, (err) =>
-			if err
-				sendFail res, err
-			else
-				sendSuccess res, null
+			if err then sendFail res, err else sendSuccess res, null
+	return
 
 module.exports = router

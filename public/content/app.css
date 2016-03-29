@@ -1,3 +1,6 @@
+* {
+	box-sizing: border-box;
+}
 nav.nav {
 	margin: 0 0 20px 0;
 }
@@ -6,4 +9,62 @@ a.btn.router-link-active {
 }
 a, span.fa {
 	cursor: pointer;
+}
+
+.table {
+	min-width: 600px;
+	width: 100%;
+	//border: 1px solid white;
+}
+.table .table-row {
+	display: block;
+	padding: 10px 10px;
+	background-color: 333333;
+}
+.table .table-row:not(.head):hover {
+	background-color: slategray;
+}
+.table .table-row.head {
+	background-color: dimgray;
+}
+.table .table-row.even {
+	background-color: darkslategray;
+}
+.table .table-row .table-data, .table .table-row .table-data.head {
+	display: inline-block;
+}
+.table .table-row .table-data.head {
+	font-weight: bold;
+}
+.table .table-row .table-data.number {
+	min-width: 30px;
+	width: 5%;
+}
+.table .table-row .table-data.name {
+	min-width: 90px;
+	width: 15%;
+}
+.table .table-row .table-data.fullname {
+	min-width: 180px;
+	width: 30%;
+}
+.table .table-row .table-data.email {
+	min-width: 180px;
+	width: 30%;
+}
+.table .table-row .table-data.admin {
+	min-width: 60px;
+	width: 10%;
+	text-align: center;
+}
+.table .table-row .table-data.controls {
+	min-width: 30px;
+	width: 5%;
+	text-align: center;
+}
+.fa-ban {
+	color: red;
+}
+.fa-check {
+	color: green;
 }

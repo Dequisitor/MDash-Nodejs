@@ -1,0 +1,20 @@
+<div class="table-data number">
+	<span>{{index}}</span>
+</div>
+<div class="table-data name">
+	<span>{{user.name}}</span>
+</div>
+<div class="table-data fullname" (click)="edit('fullname')">
+	<span *ngIf="edit()!='fullname'">{{user.fullname}}</span>
+	<input *ngIf="edit()=='fullname'" type="text" #fullname [(ngModel)]="user.fullname">
+</div>
+<div class="table-data email" (click)="edit('email')">
+	<span *ngIf="edit()!='email'">{{user.email}}</span>
+	<input *ngIf="edit()=='email'" type="text" #email [(ngModel)]="user.email">
+</div>
+<div class="table-data admin">
+	<span class="fa fa-2x" [class.fa-check]="user.isAdmin" [class.fa-ban]="!user.isAdmin"></span>
+</div>
+<div class="table-data controls">
+	<span class="fa fa-2x" [class.fa-remove]="canDelete(user)"></span>
+</div>

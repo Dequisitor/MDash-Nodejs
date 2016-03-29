@@ -1,25 +1,15 @@
 <h3>List of registered users</h3>
-<div class="container-fluid">
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th>#</th>
-				<th>Login</th>
-				<th>Full Name</th>
-				<th>Email</th>
-				<th>Admin</th>
-				<th></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr *ngFor="#user of users #index=index">
-				<td>{{index+1}}</td>
-				<td>{{user.name}}</td>
-				<td>{{user.fullname}}</td>
-				<td>{{user.email}}</td>
-				<td>{{user.isAdmin}}</td>
-				<td><span class="fa fa-remove" *ngIf="currentUser?.name == user.name"></span></td>
-			</tr>
-		</tbody>
-	</table>
+<div class="table table-striped">
+	<div class="table-row head">
+		<div class="table-data head number">#</div>
+		<div class="table-data head name">Login</div>
+		<div class="table-data head fullname">Full Name</div>
+		<div class="table-data head email">Email</div>
+		<div class="table-data head admin">Admin</div>
+		<div class="table-data head controls"></div>
+	</div>
+	<div class="table-row" *ngFor="#user of users #index=index" [class.even]="index%2 == 0">
+		<input-user [user]="user" [index]="index" [current]="currentUser">
+		</input-user>
+	</div>
 </div>

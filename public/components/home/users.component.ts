@@ -1,12 +1,14 @@
 import {Component, OnInit} from 'angular2/core'
 import {Http} from 'angular2/http'
 import {User, UserService} from '../services/user.service'
+import {InputComponent} from './input.component'
 import 'rxjs/Rx' //.map stuff
 
 @Component({
 	selector: 'users',
 	templateUrl: 'users.component.html',
-	providers: [UserService]
+	providers: [UserService],
+	directives: [InputComponent]
 })
 export class UsersComponent implements OnInit{
 	public users: User[]
